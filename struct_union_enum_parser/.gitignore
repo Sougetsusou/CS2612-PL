@@ -1,0 +1,16 @@
+# Build artifacts
+build/
+bin/
+
+# Flex/Bison outputs (if generated in root accidentally)
+lex.yy.c
+parser.tab.c
+parser.tab.h
+parser.output
+
+# Objects
+*.o
+
+# macOS
+.DS_Store
+
