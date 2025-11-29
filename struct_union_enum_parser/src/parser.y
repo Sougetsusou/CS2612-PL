@@ -33,6 +33,8 @@ struct glob_item_list * root = NULL;
 %type <glob_item> glob_item
 %type <glob_item_list> glob_item_list
 
+%expect 7
+
 %start program
 
 %%

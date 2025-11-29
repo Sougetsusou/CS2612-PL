@@ -1,6 +1,6 @@
 # 测试与构建结果
 
-- 测试时间：2025-11-29T10:25:30.359Z
+- 测试时间：2025-11-29T10:53:01.833Z
 - 环境/工具版本：
   - GCC: Apple clang version 17.0.0 (clang-1700.4.4.1)
   - Flex: flex 2.6.4 Apple(flex-35)
@@ -11,30 +11,18 @@
 ## 构建与测试输出
 
 ```
+>$ make clean
 rm -rf build bin
+>$ make
 bison -d -o build/parser.tab.c src/parser.y
-src/parser.y: conflicts: 7 shift/reduce
 flex -o build/lex.yy.c src/lexer.l
-gcc -Wall -Wextra -O2 -Iinclude -Ibuild -c build/lex.yy.c -o build/lex.yy.o
-build/lex.yy.c:1149:38: warning: comparison of integers of different signs: 'yy_size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
- 1149 |         if (((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
-      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-build/lex.yy.c:1228:17: warning: unused function 'yyunput' [-Wunused-function]
- 1228 |     static void yyunput (int c, char * yy_bp )
-      |                 ^~~~~~~
-build/lex.yy.c:1275:16: warning: function 'input' is not needed and will not be emitted [-Wunneeded-internal-declaration]
- 1275 |     static int input  (void)
-      |                ^~~~~
+gcc -Wall -Wextra -O2 -Iinclude -Ibuild -Wno-sign-compare -Wno-unused-function -Wno-unneeded-internal-declaration -c build/lex.yy.c -o build/lex.yy.o
 gcc -Wall -Wextra -O2 -Iinclude -Ibuild -c build/parser.tab.c -o build/parser.tab.o
-3 warnings generated.
 gcc -Wall -Wextra -O2 -Iinclude -Ibuild -c src/lang.c -o build/lang.o
-src/lang.c:462:10: warning: unused variable 'name' [-Wunused-variable]
-  462 |   char * name = print_var_decl_expr_rec2(e);
-      |          ^~~~
 gcc -Wall -Wextra -O2 -Iinclude -Ibuild -c src/lib.c -o build/lib.o
 gcc -Wall -Wextra -O2 -Iinclude -Ibuild -c src/main.c -o build/main.o
-1 warning generated.
 gcc -o bin/parser build/lex.yy.o build/parser.tab.o build/lang.o build/lib.o build/main.o 
+>$ make test
 ===== Running tests/simple_test.c =====
 var definition:
   Left type: int

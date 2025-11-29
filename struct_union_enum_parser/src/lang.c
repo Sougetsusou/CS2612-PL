@@ -459,7 +459,7 @@ void print_var_decl_expr_for_typedef(struct var_decl_expr * e) {
 void print_annon_var_decl_expr(struct var_decl_expr * e) {
   print_spaces();
   printf("Right type: ");
-  char * name = print_var_decl_expr_rec2(e);
+  print_var_decl_expr_rec2(e);
 }
 
 void print_glob_item(struct glob_item * g) {

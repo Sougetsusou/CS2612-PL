@@ -40,6 +40,7 @@ $(TARGET): $(OBJS) | $(BIN_DIR)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 # Compile objects
+$(BUILD_DIR)/lex.yy.o: CFLAGS += -Wno-sign-compare -Wno-unused-function -Wno-unneeded-internal-declaration
 $(BUILD_DIR)/lex.yy.o: $(LEX_C) $(YACC_H) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 

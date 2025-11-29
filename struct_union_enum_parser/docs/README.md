@@ -3,7 +3,7 @@
 本项目使用 Flex + Bison 实现对 C 语言中 struct/union/enum 的定义/声明、typedef 与变量定义（含指针/数组/函数声明符组合）的词法与语法分析，并生成课程提供的 AST 结构进行打印。
 
 最近一次验证
-- 测试时间：2025-11-29T10:25:30.359Z
+- 测试时间：2025-11-29T10:53:01.833Z
 - 测试结果：全部通过（见 docs/TEST_RESULTS.md）
 
 目录结构
@@ -64,7 +64,10 @@ var definition:
 - 完整的构建与测试输出（含工具版本）已保存至 docs/TEST_RESULTS.md
 
 已知事项
-- Bison 会报告若干 shift/reduce 冲突（声明符典型现象）；当前文法按课程要求子集与测试用例均工作正常
+- 已在 parser.y 使用 `%expect 7` 静音 Bison 冲突提示（仍存在 7 个 shift/reduce 冲突，行为不变）
+- 仅对 `lex.yy.o` 目标关闭部分告警：`-Wno-sign-compare -Wno-unused-function -Wno-unneeded-internal-declaration`
+- 修复 lang.c 未使用变量的告警
+- C 声明符特性导致的 shift/reduce 冲突属常见现象，当前实现与测试均正常
 
 许可证与致谢
 - 许可证：MIT
