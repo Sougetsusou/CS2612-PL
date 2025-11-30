@@ -75,7 +75,13 @@ TESTS := tests/simple_test.c \
 		tests/test2.c \
 		tests/test_ptr_array.c \
 		tests/test_array_ptr.c \
-		tests/comprehensive_test.c
+		tests/comprehensive_test.c \
+		tests/test_func.c \
+		tests/test_func_simple.c \
+		tests/test_func_ptr.c \
+		tests/test3.c \
+		tests/test.c \
+		tests/edge_cases.c
 
 test: $(TARGET)
 	@for t in $(TESTS); do \
